@@ -170,4 +170,57 @@ begin
     limiteTercio := cantidadAlumnos div 3;
     if (limiteTercio = 0) and (cantidadAlumnos >= 1) then limiteTercio := 1;
 
+  //PASO E: Procesar y agrupar datos por Profesor 
+    cantidadProfesores := 0;
 
+    for i := 1 to cantidadAlumnos do
+    begin
+        for j := 1 to salon[i].cantidadCursos do
+        begin
+            nombreProfActual := salon[i].cursos[j].profesor;
+            notaActual := salon[i].cursos[j].nota;
+            existeProfesor := false;
+            
+            for k := 1 to cantidadProfesores do
+            begin
+                if profesores[k].nombreProf = nombreProfActual then
+                begin
+                    existeProfesor := true;
+                    profesores[k].sumaNotas := profesores[k].sumaNotas + notaActual;
+                    profesores[k].totalNotas := profesores[k].totalNotas + 1;
+                    
+                    if notaActual >= 10.5 then 
+                        profesores[k].aprobados := profesores[k].aprobados + 1
+                    else
+                        profesores[k].desaprobados := profesores[k].desaprobados + 1;
+                end;
+            end;
+            
+            if not existeProfesor then
+            begin
+                cantidadProfesores := cantidadProfesores + 1;
+                profesores[cantidadProfesores].nombreProf := nombreProfActual;
+                profesores[cantidadProfesores].sumaNotas := notaActual;
+                profesores[cantidadProfesores].totalNotas := 1;
+                
+                if notaActual >= 10.5 then
+                begin
+                    profesores[cantidadProfesores].aprobados := 1;
+                    profesores[cantidadProfesores].desaprobados := 0;
+                end
+                else
+                begin
+                    profesores[cantidadProfesores].aprobados := 0;
+                    profesores[cantidadProfesores].desaprobados := 1;
+                end;
+            end;
+        end;
+    end;
+ //calcular el promedio de cada profesor antes de imprimir y comparar
+    for i := 1 to cantidadProfesores do
+    begin
+        if profesores[i].totalNotas > 0 then
+            profesores[i].promedioNotas := profesores[i].sumaNotas / profesores[i].totalNotas
+        else
+            profesores[i].promedioNotas := 0;
+    end;
