@@ -157,28 +157,34 @@ begin
         end;
     end;
 
-    //PASO C: Calcular los Decimos y Tercio superior
-    for i :=1 to cantidadAlumnos - 1 do
-    begin
-        for j := 1 to cantidadAlumnos - i do
-        begin 
-            if salon[j].promedioPonderado  < salon[j+1].promedioPonderado then
-            begin
-               temp := salon[j];
-               salon[j] := salon[j+1];
-               salon[j+1] := temp; 
-            end;
-        end;
-    end;
-
-    //PASO D: Calcular topes para decimo y Tercio superior 
+    //PASO C: Calcular topes para decimo y Tercio superior 
     limiteDecimo := cantidadAlumnos div 10;
     if(limiteDecimo = 0) and (cantidadAlumnos >=1) then limiteDecimo := 1;
 
     limiteTercio := cantidadAlumnos div 3;
     if (limiteTercio = 0) and (cantidadAlumnos >= 1) then limiteTercio := 1;
 
-  //PASO E: Procesar y agrupar datos por Profesor 
+    // PASO D: Mostrar el Ranking General con su Condición 
+    writeln(' RANKING GENERAL Y CONDICION DEL ESTUDIANTE:');
+    writeln('Puesto | Estudiante           | Promedio | Condicion');
+    writeln('----------------------------------------------------------------------');
+    for i := 1 to cantidadAlumnos do
+    begin
+        if salon[i].promedioPonderado < 10.5 then
+            condicion := 'Desaprobado'
+        else if i <= limiteDecimo then
+            condicion := 'DECIMO SUPERIOR'
+        else if i <= limiteTercio then
+            condicion := 'TERCIO SUPERIOR'
+        else
+            condicion := 'Regular Aprobado';
+
+        writeln('  #', i, '   | ', salon[i].nombreEstudiante:20, ' | ', salon[i].promedioPonderado:8:2, ' | ', condicion);
+    end;
+    writeln('================================================----------------------');
+    writeln;
+    
+    //PASO E: Procesar y agrupar datos por Profesor 
     cantidadProfesores := 0;
 
     for i := 1 to cantidadAlumnos do
