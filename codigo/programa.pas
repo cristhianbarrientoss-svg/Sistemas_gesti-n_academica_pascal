@@ -38,6 +38,7 @@ var
 {      PARTE 1: REGISTRO DE ALUMNOS Y NOTAS                                    }
 { ============================================================================ }
 
+  begin 
     write('¿Cuántos alumnos deseas registrar en total?: ');
     readln(cantidadAlumnos);
     //Iniciamos con un for para obtener los datos segun la cantidad de alumnos
