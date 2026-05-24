@@ -37,8 +37,15 @@ var
 { ============================================================================ }
 {      PARTE 1: REGISTRO DE ALUMNOS Y NOTAS                                    }
 { ============================================================================ }
+procedure RegistrarAlumnos;
+var
+    i, j: integer;
+begin
+    clrscr;
+    writeln('=============================================');
+    writeln('         REGISTRO DE ESTUDIANTES             ');
+    writeln('=============================================');
 
-  begin 
     write('¿Cuántos alumnos deseas registrar en total?: ');
     readln(cantidadAlumnos);
     //Iniciamos con un for para obtener los datos segun la cantidad de alumnos
@@ -90,12 +97,12 @@ var
    profesores: array[1..100] of RegistroProfesor;
    cantidadProfesores: integer;
    existeProfesor: boolean; 
-   nombreProfeActual: string[50];
+   nombreProfActual: string[50];
    notaActual: real;
 
    //Limites para saber si es tercio o decimo
    limiteDecimo, limiteTercio: integer;
-   condición: string[30];
+   condicion: string[30];
 
    //Variable para hallar los maximos nota x profes
    maxPromedio: real;
