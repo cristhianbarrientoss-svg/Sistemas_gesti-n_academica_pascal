@@ -74,3 +74,33 @@ var
     writeln('Presione cualquier tecla para regresar al menu...');
     readkey; //procedimiento para que el usuario presione una tecla y regresa al menu
 end;
+
+{ ============================================================================ }
+{      PARTE 2: RANKINGS Y REPORTES EXTENDIDOS                                 }
+{ ============================================================================ }
+
+procedure ReportesYRankings;
+var
+   i, j, k: integer;
+   sumaNotasConPeso, sumaPesos: real;
+   temp: DatosAlumno;
+
+   //Para consolidar profesores
+   profesores: array[1..100] of RegistroProfesor;
+   cantidadProfesores: integer;
+   existeProfesor: boolean; 
+   nombreProfeActual: string[50];
+   notaActual: real;
+
+   //Limites para saber si es tercio o decimo
+   limiteDecimo, limiteTercio: integer;
+   condición: string[30];
+
+   //Variable para hallar los maximos nota x profes
+   maxPromedio: real;
+   maxAprobados, maxDesaprobados: integer;
+   profMaxPromedio, profMaxAprobados, profMaxDesaprobados: string[50];
+
+
+
+    
