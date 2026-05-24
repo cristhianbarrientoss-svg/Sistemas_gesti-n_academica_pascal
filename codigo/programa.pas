@@ -224,3 +224,50 @@ begin
         else
             profesores[i].promedioNotas := 0;
     end;
+
+
+    //PASO F: Mostrar Reporte Analítico por Profesor
+    writeln(' RENDIMIENTO ANALITICO POR DOCENTE:');
+    writeln('Profesor             | Prom. Nota | Aprobados | Desaprobados');
+    writeln('--------------------------------------------------------');
+    for i := 1 to cantidadProfesores do
+    begin
+        writeln(profesores[i].nombreProf:20,' | ', 
+                profesores[i].promedioNotas:10:2,' | ', 
+                profesores[i].aprobados:9,' | ', 
+                profesores[i].desaprobados:12);
+    end;
+    writeln('=========================================================');
+    writeln;
+
+    //PASO G: Evaluar e Imprimir los Máximos por Profesor
+    maxPromedio := profesores[1].promedioNotas;
+    profMaxPromedio := profesores[1].nombreProf;
+    
+    maxAprobados := profesores[1].aprobados;
+    profMaxAprobados := profesores[1].nombreProf;
+    
+    maxDesaprobados := profesores[1].desaprobados;
+    profMaxDesaprobados := profesores[1].nombreProf;
+
+    //Recorremos los demás profesores para buscar récords
+    for i := 2 to cantidadProfesores do
+    begin
+        if profesores[i].promedioNotas > maxPromedio then
+        begin
+            maxPromedio := profesores[i].promedioNotas;
+            profMaxPromedio := profesores[i].nombreProf;
+        end;
+        
+        if profesores[i].aprobados > maxAprobados then
+        begin
+            maxAprobados := profesores[i].aprobados;
+            profMaxAprobados := profesores[i].nombreProf;
+        end;
+        
+        if profesores[i].desaprobados > maxDesaprobados then
+        begin
+            maxDesaprobados := profesores[i].desaprobados;
+            profMaxDesaprobados := profesores[i].nombreProf;
+        end;
+    end;
