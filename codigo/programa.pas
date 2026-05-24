@@ -100,7 +100,53 @@ var
    maxPromedio: real;
    maxAprobados, maxDesaprobados: integer;
    profMaxPromedio, profMaxAprobados, profMaxDesaprobados: string[50];
+begin
+    clrscr;
+    writeln('======================================================================');
+    writeln('                   REPORTES Y RANKINGS ACADEMICOS                     ');
+    writeln('======================================================================');
+    
+    if cantidadAlumnos = 0 then //condicionando la entrada de 0 alumnos para cerrar el programa
+    begin
+        writeln('Error: No hay alumnos registrados en el sistema.');
+        writeln('Primero use la opcion 1 para ingresar datos.');
+        writeln('======================================================================');
+        writeln('Presione cualquier tecla para regresar...');
+        readkey;
+        exit;
+    end;
 
+    //PASO A: Calcular el Promedio Ponderado de cada alumno
+    for i := 1 to cantidadAlumnos do
+    begin
+        sumaNotasConPeso := 0;
+        sumaPesos := 0;
+        
+        for j := 1 to salon[i].cantidadCursos do
+        begin
+            sumaNotasConPeso := sumaNotasConPeso + (salon[i].cursos[j].nota * salon[i].cursos[j].peso);
+            sumaPesos := sumaPesos + salon[i].cursos[j].peso;
+        end;
+        
+        if sumaPesos > 0 then
+            salon[i].promedioPonderado := sumaNotasConPeso / sumaPesos
+        else
+            salon[i].promedioPonderado := 0;
+    end;
+
+    //PASO B: Ordenar alumnos de mayor a menor (usando método burbuja)
+    for i := 1 to cantidadAlumnos - 1 do
+    begin
+        for j := 1 to cantidadAlumnos - i do
+        begin
+            if salon[j].promedioPonderado < salon[j+1].promedioPonderado then
+            begin
+                temp := salon[j];
+                salon[j] := salon[j+1];
+                salon[j+1] := temp;
+            end;
+        end;
+    end;
 
 
     
