@@ -271,3 +271,48 @@ begin
             profMaxDesaprobados := profesores[i].nombreProf;
         end;
     end;
+ //Imprimir el cuadro de resumen final de profesores
+    writeln(' RESUMEN GENERAL DE DESTACADOS Y ALERTAS DE DOCENTES:');
+    writeln('----------------------------------------------------------------------');
+    writeln(' -> Mayor Promedio de Notas : ', profMaxPromedio, ' (Prom: ', maxPromedio:2:2, ')');
+    writeln(' -> Mayor Cantidad Aprobados: ', profMaxAprobados, ' (Cant: ', maxAprobados, ' alumnos)');
+    writeln(' -> Mayor Cantidad Jalaos   : ', profMaxDesaprobados, ' (Cant: ', maxDesaprobados, ' alumnos)');
+    writeln('======================================================================');
+    
+    writeln;
+    writeln('Presione cualquier tecla para regresar al menu...');
+    readkey;
+end;
+
+
+{ ============================================================================ }
+{      PROGRAMA PRINCIPAL (EL MENÚ DE LA APLICACIÓN)                           }
+{ ============================================================================ }
+var
+    opcion: integer;
+begin
+    cantidadAlumnos := 0; 
+    
+    repeat //bucle que mostrara el menu mientras no se seleccione la opcion 3 para salir
+        clrscr;
+        writeln('=============================================');
+        writeln('       SISTEMA DE GESTION ACADEMICA          ');
+        writeln('=============================================');
+        writeln('1. Registrar Alumnos y Notas');
+        writeln('2. Mostrar Reportes y Rankings');
+        writeln('3. Salir del Sistema');
+        writeln('=============================================');
+        write('Seleccione una opcion (1-3): ');
+        readln(opcion);
+        
+        case opcion of
+            1: RegistrarAlumnos;   
+            2: ReportesYRankings;  
+            3: writeln('Saliendo del programa... ¡Hasta luego!');
+        else
+            writeln('Opcion no valida. Intente de nuevo.');
+            delay(1500); //El programa se queda frenado un segundo y medio paraleer el aviso de que la opción no es válida y que la pantalla se limpie
+        end;
+        
+    until opcion = 3;
+end.
